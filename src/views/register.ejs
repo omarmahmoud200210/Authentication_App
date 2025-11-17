@@ -1,0 +1,71 @@
+<%- include('partials/header') %>
+
+<div class="min-h-screen bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900 flex items-center justify-center px-4 py-12">
+  <div class="max-w-md w-full bg-white/5 backdrop-blur rounded-3xl border border-white/10 shadow-2xl p-10 space-y-8">
+    <div class="space-y-2 text-center text-white">
+      <p class="text-xs uppercase tracking-[0.4em] text-indigo-300">Join securely</p>
+      <h1 class="text-3xl font-semibold">Create your free account</h1>
+      <p class="text-sm text-indigo-200">Set up credentials to access the dashboard.</p>
+    </div>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+    <div class="rounded bg-red-100 border border-red-400 text-red-700 px-4 py-3 text-sm text-center">
+      <% error.forEach((err) => { %>
+      <div><%= err.msg %></div>
+      <% }); %>
+    </div>
+    <% } %>
+
+    <form action="/auth/register" method="POST" class="space-y-6">
+      <div class="space-y-1">
+        <label for="email" class="block text-sm font-medium text-indigo-100">Email address</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          required
+          class="block w-full rounded-2xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-gray-400 focus:border-indigo-400 focus:outline-none"
+        />
+      </div>
+
+      <div class="space-y-1">
+        <label for="password" class="text-sm font-medium text-indigo-100">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          autocomplete="new-password"
+          minlength="8"
+          required
+          class="block w-full rounded-2xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-gray-400 focus:border-indigo-400 focus:outline-none"
+        />
+      </div>
+
+      <div class="space-y-1">
+        <label for="confirmPassword" class="text-sm font-medium text-indigo-100">Confirm Password</label>
+        <input
+          id="confirmPassword"
+          name="confirmPassword"
+          type="password"
+          autocomplete="new-password"
+          required
+          class="block w-full rounded-2xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-gray-400 focus:border-indigo-400 focus:outline-none"
+        />
+      </div>
+
+      <button
+        type="submit"
+        class="w-full rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-500 px-4 py-3 text-sm font-semibold text-white shadow-lg transition hover:from-indigo-600 hover:to-purple-600"
+      >
+        Register
+      </button>
+    </form>
+
+    <p class="text-center text-sm text-indigo-200">
+      Already have an account? <a href="/auth/login" class="font-semibold text-white hover:text-gray-200">Sign in</a>
+    </p>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,126 @@
+<%- include('partials/header') %>
+
+<div class="min-h-screen bg-gray-100">
+  <!-- Sidebar -->
+  <div class="bg-indigo-600 text-white w-64 fixed h-full">
+    <div class="p-4 border-b border-indigo-500">
+      <h1 class="text-2xl font-bold">Dashboard</h1>
+    </div>
+    <nav class="mt-6">
+      <a href="/dashboard" class="flex items-center px-6 py-3 text-white bg-indigo-700">
+        <span class="mx-3">Overview</span>
+      </a>
+      <a href="#" class="flex items-center px-6 py-3 text-indigo-200 hover:bg-indigo-700">
+        <span class="mx-3">Profile</span>
+      </a>
+      <a href="#" class="flex items-center px-6 py-3 text-indigo-200 hover:bg-indigo-700">
+        <span class="mx-3">Settings</span>
+      </a>
+      <form action="/logout" method="POST" class="inline">
+        <button
+          type="submit"
+          class="flex items-center px-6 py-3 text-indigo-200 hover:bg-indigo-700 hover:text-white rounded-lg w-full text-left"
+        >
+          <span class="mx-3">Logout</span>
+        </button>
+      </form>
+
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <div class="ml-64 p-8">
+    <!-- Header -->
+    <header class="bg-white shadow rounded-lg p-6 mb-6">
+      <h2 class="text-2xl font-semibold text-gray-800">Welcome back, <span class="text-indigo-600"><%= user ? user.email : 'User' %></span>!</h2>
+      <p class="text-gray-600">Here's what's happening with your account today.</p>
+    </header>
+
+    <!-- Stats Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+      <!-- Card 1 -->
+      <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+          <div class="p-3 rounded-full bg-indigo-100 text-indigo-600">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-gray-500">Total Users</p>
+            <h3 class="text-2xl font-semibold">1,234</h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+          <div class="p-3 rounded-full bg-green-100 text-green-600">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-gray-500">Projects</p>
+            <h3 class="text-2xl font-semibold">42</h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+          <div class="p-3 rounded-full bg-yellow-100 text-yellow-600">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-gray-500">Active Now</p>
+            <h3 class="text-2xl font-semibold">12</h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+          <div class="p-3 rounded-full bg-red-100 text-red-600">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-gray-500">Growth</p>
+            <h3 class="text-2xl font-semibold">+12.5%</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="bg-white rounded-lg shadow p-6">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-lg font-semibold text-gray-800">Recent Activity</h3>
+        <a href="#" class="text-sm text-indigo-600 hover:text-indigo-800">View All</a>
+      </div>
+      <div class="space-y-4">
+        <div class="flex items-center p-3 hover:bg-gray-50 rounded-lg transition-colors">
+          <div class="p-2 rounded-full bg-indigo-100 text-indigo-600">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-900">New user registered</p>
+            <p class="text-sm text-gray-500">5 minutes ago</p>
+          </div>
+        </div>
+        <!-- More activity items... -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
