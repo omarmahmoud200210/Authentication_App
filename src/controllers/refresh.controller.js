@@ -10,7 +10,7 @@ const handleRefresh = (req, res) => {
 
     const refreshToken = cookies.jwt;
 
-    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, async (err, decode) => {
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN, async (err, decode) => {
         if (err) return res.status(403).render("errors/403");
         const foundUser = await UserSchema.findById(decode.userId.id);
         if (!foundUser) return res.status(401).render("errors/401");
