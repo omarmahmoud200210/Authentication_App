@@ -41,6 +41,7 @@ app.use(cors(corsOptions));
 app.use(cookieParser());
 
 // setup the app routes
+app.get("/", (req, res) => res.render("landing"));
 app.use("/auth/login", loginRouter);
 app.use("/auth/register", registerRouter);
 app.use("/dashboard", dashboardRouter);

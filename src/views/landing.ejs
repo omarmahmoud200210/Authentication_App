@@ -1,0 +1,55 @@
+<%- include('partials/header') %>
+
+<div class="min-h-screen bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900 flex items-center justify-center px-6 py-16">
+  <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    <div class="space-y-6 text-white">
+      <p class="text-xs uppercase tracking-[0.4em] text-indigo-300">Welcome to Auth System</p>
+      <h1 class="text-4xl md:text-5xl font-semibold leading-tight">
+        Secure access starts with a single sign in.
+      </h1>
+      <p class="text-lg text-indigo-100">
+        Manage your authentication workflow with a modern, secure dashboard. Log in to continue where you left off.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a
+          href="/auth/login"
+          class="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-500 px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:from-indigo-600 hover:to-purple-600"
+        >
+          Go to Login
+        </a>
+        <a
+          href="/auth/login"
+          class="inline-flex items-center justify-center rounded-2xl border border-white/30 px-6 py-3 text-sm font-semibold text-white/90 backdrop-blur transition hover:border-white hover:text-white"
+        >
+          Return to Login
+        </a>
+      </div>
+    </div>
+
+    <div class="bg-white/5 backdrop-blur rounded-3xl border border-white/10 shadow-2xl p-8 space-y-6 text-white">
+      <div>
+        <p class="text-sm uppercase tracking-[0.35em] text-indigo-300">Why sign in</p>
+        <h2 class="text-2xl font-semibold mt-2">Stay in control</h2>
+        <p class="text-sm text-indigo-100 mt-2">
+          Access your personalized dashboard, manage sessions, and keep your data protected with our secure authentication flow.
+        </p>
+      </div>
+      <ul class="space-y-4 text-sm text-indigo-100">
+        <li class="flex items-center gap-3">
+          <span class="h-10 w-10 flex items-center justify-center rounded-full bg-white/10 text-indigo-200 font-semibold">1</span>
+          <span>Authenticate with industry-standard security.</span>
+        </li>
+        <li class="flex items-center gap-3">
+          <span class="h-10 w-10 flex items-center justify-center rounded-full bg-white/10 text-indigo-200 font-semibold">2</span>
+          <span>Manage refresh tokens with confidence.</span>
+        </li>
+        <li class="flex items-center gap-3">
+          <span class="h-10 w-10 flex items-center justify-center rounded-full bg-white/10 text-indigo-200 font-semibold">3</span>
+          <span>Enjoy a seamless dashboard experience.</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
