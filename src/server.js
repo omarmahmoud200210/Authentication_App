@@ -18,7 +18,9 @@ dotenv.config();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const PORT = process.env.PORT || 3000;
+const isVercel = process.env.VERCEL === "1";
 const app = express();
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -30,10 +32,11 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 // steup CORS
+const clientOrigin = (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: clientOrigin,
   credentials: true,
-  optionSuccessStatus: 200,
+  optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
 
@@ -51,10 +54,15 @@ app.use("/logout", logoutRouter);
 // 404 handler
 app.use((req, res) => res.status(404).render("errors/404"));
 
-// - Running the server
-app.listen(PORT, async () => {
-  // 1. Connect with mongo
-  await ConnectWithMongo(process.env.MONGO_URL);
-  // 2. check the server is running
-  console.log(`Server is running on ${PORT}`);
-});
+// ensure database connection is established once
+ConnectWithMongo(process.env.MONGO_URL)
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error("Mongo connection error", err));
+
+if (!isVercel) {
+  app.listen(PORT, () => {
+    console.log(`Server is running on ${PORT}`);
+  });
+}
+
+export default app;

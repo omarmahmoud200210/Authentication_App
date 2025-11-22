@@ -19,6 +19,12 @@ const handleLogin = async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (isMatch) {
+            const cookieBaseOptions = {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === "production",
+                sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax"
+            };
+
             const accessToken = jwt.sign({
                 userId: {id: user._id},
             }, process.env.JWT_SECRET, { expiresIn: "15m" });
@@ -28,16 +34,12 @@ const handleLogin = async (req, res) => {
             }, process.env.REFRESH_TOKEN, { expiresIn: "7d" });
             
             res.cookie("jwt", refreshToken, {
-                httpOnly: true,
-                secure: true,
-                sameSite: "None",
+                ...cookieBaseOptions,
                 maxAge: 7 * 24 * 60 * 60 * 1000
             }); 
             
             res.cookie("access_token", accessToken, {
-                httpOnly: true,
-                secure: true,
-                sameSite: "None",
+                ...cookieBaseOptions,
                 maxAge: 15 * 60 * 1000
             });
 

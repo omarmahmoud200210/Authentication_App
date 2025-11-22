@@ -3,18 +3,14 @@ const logout = (req, res) => {
 
     if (!cookies?.jwt) return res.sendStatus(204);
     
-    res.clearCookie("jwt", {
+    const cookieBaseOptions = {
         httpOnly: true,
-        sameSite: "none",
-        secure: true,
-    });
+        sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+        secure: process.env.NODE_ENV === "production"
+    };
 
-    res.clearCookie("access_token", {
-        httpOnly: true,
-        sameSite: "none",
-        secure: true,
-    });
-
+    res.clearCookie("jwt", cookieBaseOptions);
+    res.clearCookie("access_token", cookieBaseOptions);
     res.redirect("/auth/login");
  }
 

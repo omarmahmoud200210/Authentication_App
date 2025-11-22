@@ -42,17 +42,19 @@ const handleRegister = async (req, res) => {
     { expiresIn: "7d" }
   );
 
-  res.cookie("jwt", refreshToken, {
+  const cookieBaseOptions = {
     httpOnly: true,
-    secure: true,
-    sameSite: "none",
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax"
+  };
+
+  res.cookie("jwt", refreshToken, {
+    ...cookieBaseOptions,
     maxAge: 7 * 24 * 60 * 60 * 1000
   });
 
   res.cookie("access_token", accessToken, {
-    httpOnly: true,
-    secure: true,
-    sameSite: "none",
+    ...cookieBaseOptions,
     maxAge: 15 * 60 * 1000
   });
 

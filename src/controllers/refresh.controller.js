@@ -19,13 +19,19 @@ const handleRefresh = (req, res) => {
             userId: {id: foundUser._id},
         }, process.env.JWT_SECRET, { expiresIn: "15m" });
 
+        const cookieBaseOptions = {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax"
+        };
+
         res.cookie("access_token", accessToken,
         {
-            httpOnly: true,
-            secure: true,
-            sameSite: "none",
+            ...cookieBaseOptions,
             maxAge: 15 * 60 * 1000
         });
+
+        res.json({ success: true });
     });
 };
 
