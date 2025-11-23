@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Serve static files from public
 const publicPath = path.join(process.cwd(), 'public');
-app.use(express.static(publicPath, { 
+app.use(express.static(publicPath, {
   setHeaders: (res, path) => {
     if (path.endsWith('.css')) {
       res.setHeader('Content-Type', 'text/css');

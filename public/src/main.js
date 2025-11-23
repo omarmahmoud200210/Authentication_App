@@ -6,12 +6,12 @@ const refreshAuth = async () => {
 const checkAuth = async () => { 
     const response = await fetch("/dashboard", { method: 'get', credentials: "include"});
 
-    if (response.status === 403) {
-        await refreshAuth();
-        return;
-    }
-
+    if (response.status === 403) await refreshAuth();
     if (response.status === 401) return;
 }
 
-checkAuth();
+document.addEventListener("DOMContentLoaded", async () => {
+    if (!window.location.pathname.includes("/auth/login")) {
+        await checkAuth();
+    }
+});
