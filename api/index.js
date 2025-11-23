@@ -1,0 +1,6 @@
+// api/index.js
+import app from '../src/server.js';
+
+export default async (req, res) => {
+  return app(req, res);
+};

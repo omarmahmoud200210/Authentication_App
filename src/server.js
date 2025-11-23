@@ -15,17 +15,24 @@ import logoutRouter from "./routes/logout.router.js";
 dotenv.config();
 
 // Path Configuration
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const isVercel = process.env.VERCEL === '1';
 const PORT = process.env.PORT || 3000;
-const isVercel = process.env.VERCEL === "1";
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve static files from public
-app.use(express.static(path.join(__dirname, "../public")));
+const publicPath = path.join(process.cwd(), 'public');
+app.use(express.static(publicPath, { 
+  setHeaders: (res, path) => {
+    if (path.endsWith('.css')) {
+      res.setHeader('Content-Type', 'text/css');
+    }
+  }
+}));
 
 // connect with ejs
 app.set("view engine", "ejs");
